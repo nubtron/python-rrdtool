@@ -106,9 +106,11 @@ def compile_extensions(macros, compat=False):
             compiler.compile([file_name]),
             bin_file_name,
             libraries=libraries)
-    except CompileError:
+    except CompileError as e:
+        print(f"CompileError: {e}")
         sys.exit('Error: Unable to compile the binary module. Do you have the rrdtool header and libraries installed?')
-    except LinkError:
+    except LinkError as e:
+        print(f"LinkError: {e}")
         raise
     else:
         return exts  # seems to be available, compile in regular way
